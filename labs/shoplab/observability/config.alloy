@@ -1,0 +1,36 @@
+local.file_match "websec_api" {
+  path_targets = [{
+    "__path__" = "/var/log/websec/*.jsonl",
+    "service"  = "websec-api",
+  }]
+}
+
+loki.source.file "websec_api" {
+  targets    = local.file_match.websec_api.targets
+  forward_to = [loki.process.websec_api.receiver]
+}
+
+loki.process "websec_api" {
+  stage.json {
+    expressions = {
+      event          = "event",
+      result         = "result",
+      mode           = "mode",
+      correlation_id = "correlation_id",
+    }
+  }
+  stage.labels {
+    values = {
+      event  = "",
+      result = "",
+      mode   = "",
+    }
+  }
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}

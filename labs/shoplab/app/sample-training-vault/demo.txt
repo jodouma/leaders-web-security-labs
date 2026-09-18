@@ -1,0 +1,1 @@
+Donnée synthétique hors racine publique, uniquement pour le test local de traversal.

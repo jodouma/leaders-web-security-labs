@@ -1,0 +1,23 @@
+name: student-labs-static
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax
+        run: find scripts labs -type f -name '*.sh' -print0 | xargs -0 -n1 bash -n
+      - name: Python syntax
+        run: python3 -m compileall -q labs/shoplab/app starter-files
+      - name: Compose model
+        run: docker compose -f labs/shoplab/docker-compose.yml --profile core config -q
+      - name: Public safety invariants
+        run: |
+          ! find . -mindepth 2 -type d -name .git | grep .
+          ! grep -RInE '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|api[_-]?key[[:space:]]*[:=])' .
+          ! grep -RInE 'https?://([^/]*\.)?(internal|corp|lan)(/|:|$)' .
+          ! find . -type d \( -iname '*answer*' -o -iname '*solution*' \) | grep .

@@ -1,0 +1,15 @@
+title = "Leaders WebSec lab — default rules with documented synthetic exclusions"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated QA/runtime files and the explicit invalid training token are not secrets"
+paths = [
+  '''(^|/)lab-environment/\.state/''',
+  '''(^|/)qa/(renders|tmp)/''',
+  '''(^|/)source/__pycache__/''',
+]
+regexes = [
+  '''invalid\.lab\.token''',
+]
