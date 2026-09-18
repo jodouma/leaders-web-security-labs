@@ -2,6 +2,19 @@
 
 Parcours local et reproductible de sécurité web : 7 TP, 4 TD, fichiers de départ et ShopLab. Les activités sont conçues pour `127.0.0.1` et un réseau Docker isolé. N'utilisez jamais les commandes ou charges sur un système tiers.
 
+## Préparation avant le cours
+
+Installez d'abord Git avec le gestionnaire officiel de votre OS, puis clonez le dépôt public :
+
+```bash
+git clone https://github.com/jodouma/leaders-web-security-labs.git
+cd leaders-web-security-labs
+```
+
+Prérequis du cœur du lab : Git, Docker avec Compose v2, `curl`, OpenSSL et Python 3.11+. Prévoyez 2 CPU, 4 Gio de RAM et 12 Gio libres; le setup macOS réserve un disque Colima de 20 Gio. Suivez ensuite le guide correspondant : [Windows 11 + WSL2](docs/setup/windows-wsl2.md), [Ubuntu](docs/setup/ubuntu.md), [Kali Linux](docs/setup/kali.md) ou [macOS](docs/setup/macos.md).
+
+Depuis la racine du dépôt, lancez `./scripts/verify-host.sh` sous Linux, WSL2 ou macOS. Dans un checkout Windows accessible depuis PowerShell, utilisez `Set-ExecutionPolicy -Scope Process Bypass`, puis `.\scripts\Verify-Host.ps1`. En cas de `[FAIL]`, ne démarrez pas ShopLab : envoyez une capture complète de l'erreur et le nom/version de votre OS, après avoir masqué toute donnée personnelle ou tout jeton.
+
 ## Démarrage recommandé
 
 1. Lisez [les règles de sécurité](SECURITY.md) et le guide de votre OS dans `docs/setup/`.

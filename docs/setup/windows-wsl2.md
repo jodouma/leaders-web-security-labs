@@ -11,7 +11,9 @@ wsl --update
 
 Redémarrez si Windows le demande, ouvrez Ubuntu, puis placez le dépôt dans `~/leaders-web-security-labs` (pas sous `/mnt/c`) pour éviter permissions et lenteurs. Installez Docker Desktop depuis sa source officielle, activez « Use WSL 2 based engine » puis l'intégration de la distribution Ubuntu.
 
-Dans PowerShell, contrôle non destructif :
+Le parcours recommandé continue dans WSL2 : clonez-y le dépôt, puis utilisez les commandes Bash ci-dessous. Les scripts PowerShell sont une alternative pour un checkout Windows distinct et accessible depuis PowerShell; ne lancez pas leurs chemins depuis le shell WSL.
+
+Dans PowerShell, depuis la racine d'un checkout Windows, contrôle non destructif :
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass
