@@ -17,11 +17,11 @@ Depuis la racine du dépôt, lancez `./scripts/verify-host.sh` sous Linux, WSL2 
 
 ## Supports du jour
 
-- [Présentation S01–S02 — éthique, scope, preuve et chemin d'une requête](docs/today/presentation_S01-S02.pdf)
-- [Guide TP01 — installer ShopLab et observer une requête (PDF)](tp/TP01_observer_le_flux.pdf)
-- [Guide TP02 — session, cookie, rotation, logout et CSRF (PDF)](tp/TP02_session_cookie_csrf.pdf)
+- [Présentation S01–S02 — éthique, scope, preuve et chemin d'une requête](course-materials/presentations/S01-S02.pdf)
+- [Guide TP01 — installer ShopLab et observer une requête (PDF)](course-materials/tp-guides/TP01_observer_le_flux.pdf)
+- [Guide TP02 — session, cookie, rotation, logout et CSRF (PDF)](course-materials/tp-guides/TP02_session_cookie_csrf.pdf)
 
-Les versions Markdown des TP restent disponibles dans `tp/` pour copier les commandes.
+Tous les PDF prêts à projeter ou distribuer sont regroupés dans `course-materials/`. Les versions Markdown des TP restent séparées dans `tp/` pour lire et copier les commandes. Le laboratoire exécutable reste seul dans `labs/`.
 
 ## Démarrage recommandé
 
@@ -44,7 +44,8 @@ Chaque vérificateur affiche `[PASS]`, `[WARN]` ou `[FAIL]`. `WARN` signifie qu'
 ## Arborescence
 
 - `docs/setup/` : installation Windows/WSL2, Ubuntu, Kali et macOS; `docs/` contient dépannage et remise ;
-- `tp/`, `td/` : sujets étudiants ;
+- `course-materials/` : présentations et guides TP au format PDF ;
+- `tp/`, `td/` : sujets étudiants au format Markdown ;
 - `starter-files/` : code à compléter et tests de départ ;
 - `labs/shoplab/` : application locale, Compose et scripts de cycle de vie ;
 - `scripts/` : setup et vérification hôte ;
