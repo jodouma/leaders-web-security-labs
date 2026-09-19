@@ -15,6 +15,14 @@ Prérequis du cœur du lab : Git, Docker avec Compose v2, `curl`, OpenSSL et Pyt
 
 Depuis la racine du dépôt, lancez `./scripts/verify-host.sh` sous Linux, WSL2 ou macOS. Dans un checkout Windows accessible depuis PowerShell, utilisez `Set-ExecutionPolicy -Scope Process Bypass`, puis `.\scripts\Verify-Host.ps1`. En cas de `[FAIL]`, ne démarrez pas ShopLab : envoyez une capture complète de l'erreur et le nom/version de votre OS, après avoir masqué toute donnée personnelle ou tout jeton.
 
+## Supports du jour
+
+- [Présentation S01–S02 — éthique, scope, preuve et chemin d'une requête](docs/today/presentation_S01-S02.pdf)
+- [Guide TP01 — installer ShopLab et observer une requête (PDF)](tp/TP01_observer_le_flux.pdf)
+- [Guide TP02 — session, cookie, rotation, logout et CSRF (PDF)](tp/TP02_session_cookie_csrf.pdf)
+
+Les versions Markdown des TP restent disponibles dans `tp/` pour copier les commandes.
+
 ## Démarrage recommandé
 
 1. Lisez [les règles de sécurité](SECURITY.md) et le guide de votre OS dans `docs/setup/`.
