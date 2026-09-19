@@ -29,7 +29,11 @@ Résultat attendu : des lignes `[PASS]`, l'URL locale et `mode=vulnerable`. Un `
 
 ## A — Scope et dossier de preuve (20 min)
 
-Créez un dossier hors Git `preuves/TP01/`. Dans `scope.md`, notez cible autorisée, heure de début, outils, stop conditions et règle d'expurgation. Relevez `git rev-parse --short HEAD`, `docker version` et `docker compose version`.
+```bash
+mkdir -p preuves/TP01
+```
+
+Dans `scope.md`, notez cible autorisée, heure de début, outils, stop conditions et règle d'expurgation. Relevez `git rev-parse --short HEAD`, `docker version` et `docker compose version`.
 
 ## B — Requête HTTP (35 min)
 

@@ -1,6 +1,6 @@
 # Remise étudiante
 
-Créez un dossier `preuves/TPxx/` hors de ce dépôt. Remettez : rapport Markdown/PDF, index des preuves, extraits minimaux expurgés, tests écrits et sortie finale PASS/WARN/FAIL. Pour chaque preuve : timestamp UTC, commande locale, résultat, interprétation et limite.
+Depuis `labs/shoplab`, créez le dossier `preuves/TPxx/`, ignoré par Git. Pour la remise, copiez seulement les éléments expurgés dans un dossier hors du dépôt : rapport Markdown/PDF, index des preuves, extraits minimaux, tests écrits et sortie finale PASS/WARN/FAIL. Pour chaque preuve : timestamp UTC, commande locale, résultat, interprétation et limite.
 
 Avant remise :
 

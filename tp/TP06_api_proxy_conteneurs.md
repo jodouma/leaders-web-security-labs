@@ -15,6 +15,7 @@ Inventaire d'endpoints classé par actif/authz, preuve de mass assignment avant/
 ```bash
 cd labs/shoplab
 ./scripts/reset.sh
+mkdir -p preuves/TP06
 base=http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}
 curl -sS "$base/openapi.json" > preuves/TP06/openapi.json
 ```
