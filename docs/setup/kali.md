@@ -1,13 +1,17 @@
 # Installation Kali Linux
 
-Kali rolling utilise normalement `docker.io` et le plugin Compose disponible dans ses dépôts. Ne mélangez pas le dépôt Docker CE Ubuntu avec Kali.
+Prérequis : Kali rolling, 2 CPU, 4 Gio RAM, 12 Gio libres et accès Internet initial. Utilisez `docker.io` et Compose des dépôts Kali; ne mélangez pas un dépôt Docker CE Ubuntu. Git, Python 3.11+, `curl` et OpenSSL sont requis.
 
 ```bash
+git clone https://github.com/jodouma/leaders-web-security-labs.git
+cd leaders-web-security-labs
 ./scripts/setup-debian.sh --install
 newgrp docker   # si indiqué
 ./scripts/verify-host.sh
+docker version && docker compose version
+python3 --version && curl --version && openssl version
 ```
 
-Le script détecte `ID=kali`, installe les paquets de la distribution et démarre le service si systemd est actif. Une VM doit avoir au moins 2 CPU, 4 Gio et 12 Gio libres. Les outils offensifs préinstallés ne changent pas le scope : seuls localhost/réseau ShopLab sont autorisés.
+Succès attendu : aucune ligne `[FAIL]`. Puis : `cd labs/shoplab && ./scripts/lab-start.sh core && ./scripts/health-check.sh core`; attendez HTTP `200`, `mode=vulnerable`. Les outils offensifs préinstallés ne changent pas le scope : seulement localhost/réseau ShopLab.
 
-Si Compose v2 n'est pas empaqueté, `[FAIL]` est intentionnel : installez la version recommandée par la documentation Kali, puis relancez la vérification. Ne téléchargez pas un binaire non vérifié pendant le cours.
+Dépannage : si Compose v2 manque, installez la version recommandée par Kali, puis relancez la vérification; ne téléchargez pas un binaire non vérifié. Aide : partagez OS et lignes `[FAIL]` expurgées. Cleanup : `./scripts/cleanup.sh` depuis `labs/shoplab`.

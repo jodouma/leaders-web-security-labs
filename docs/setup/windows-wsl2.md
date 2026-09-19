@@ -2,7 +2,7 @@
 
 ## Choix recommandé
 
-Utilisez WSL2 Ubuntu et Docker Desktop avec l'intégration WSL. Activez la virtualisation dans l'UEFI si nécessaire. Dans PowerShell administrateur :
+Prérequis : Windows 11, virtualisation active, 2 CPU, 4 Gio RAM, 12 Gio libres, accès Internet initial. Utilisez WSL2 Ubuntu et Docker Desktop avec intégration WSL. Git, Python 3.11+, `curl` et OpenSSL sont vérifiés dans WSL.
 
 ```powershell
 wsl --install -d Ubuntu
@@ -23,9 +23,14 @@ Set-ExecutionPolicy -Scope Process Bypass
 Dans WSL :
 
 ```bash
+git clone https://github.com/jodouma/leaders-web-security-labs.git
+cd leaders-web-security-labs
 ./scripts/setup-debian.sh --check
 ./scripts/verify-host.sh
+docker version && docker compose version
+python3 --version && curl --version && openssl version
 cd labs/shoplab && ./scripts/lab-start.sh core
+./scripts/health-check.sh core
 ```
 
-N'installez pas un second daemon Docker dans WSL si Docker Desktop fournit déjà le moteur. Les URLs restent `https://127.0.0.1:8443`; le certificat est auto-signé et n'est pas importé globalement. Cleanup avant d'éteindre WSL.
+Succès attendu : aucune ligne `[FAIL]`, HTTP `200`, `mode=vulnerable`. N'installez pas un second daemon Docker dans WSL. Si Docker est inaccessible, ouvrez Docker Desktop et activez l'intégration de la distribution; gardez le dépôt sous `~/`, pas `/mnt/c`. Aide : partagez `wsl --status`, la distribution et les lignes `[FAIL]` expurgées. Exécutez `./scripts/cleanup.sh` avant d'éteindre WSL.
