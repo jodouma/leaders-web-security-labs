@@ -1,12 +1,16 @@
 # Installation macOS
 
-Chemin recommandé : Homebrew + Colima + Docker CLI/Compose. Docker Desktop reste compatible si déjà géré par l'organisation.
+Prérequis : macOS, 2 CPU, 4 Gio RAM, 20 Gio libres et accès Internet initial. Chemin recommandé : Homebrew + Colima + Docker CLI/Compose; Docker Desktop reste compatible. Git, Python 3.11+, `curl` et OpenSSL sont requis.
 
 ```bash
+git clone https://github.com/jodouma/leaders-web-security-labs.git
+cd leaders-web-security-labs
 ./scripts/setup-macos.sh --install
 ./scripts/verify-host.sh
+docker version && docker compose version
+python3 --version && curl --version && openssl version
 ```
 
-Le setup installe seulement les éléments absents, crée les liens de plugins CLI si nécessaires et démarre Colima avec 2 CPU, 4 Gio, 20 Gio. Il est relançable. Sur Apple Silicon, les images utilisées sont multi-architecture; un `[WARN]` signale une image non encore validée localement.
+Succès attendu : aucune ligne `[FAIL]`. Puis : `cd labs/shoplab && ./scripts/lab-start.sh core && ./scripts/health-check.sh core`; attendez HTTP `200`, `mode=vulnerable`.
 
-Pour arrêter la VM après cleanup : `colima stop`. La suppression complète `colima delete` détruit sa VM et n'est jamais exécutée par ces scripts. Le certificat ShopLab reste local et auto-signé; ne l'ajoutez pas au trousseau système.
+Dépannage : `colima start` si le daemon est absent; vérifiez le lien du plugin Compose avec le script. Aide : partagez version macOS/CPU et lignes `[FAIL]` expurgées. Après `labs/shoplab/scripts/cleanup.sh`, `colima stop` est permis; n'exécutez pas `colima delete`. N'importez pas le certificat local dans le trousseau système.

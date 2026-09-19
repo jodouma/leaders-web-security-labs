@@ -2,6 +2,14 @@
 
 Parcours local et reproductible de sécurité web : 7 TP, 4 TD, fichiers de départ et ShopLab. Les activités sont conçues pour `127.0.0.1` et un réseau Docker isolé. N'utilisez jamais les commandes ou charges sur un système tiers.
 
+## START HERE — journée du 20 septembre 2026
+
+1. [Programme du jour (PDF)](course-materials/day-guides/2026-09-20-programme-journee.pdf)
+2. [Setup par plateforme](course-materials/setup-guides/)
+3. [Cours complet](course-materials/course/cours_complet.pdf)
+4. [Présentation du jour S01–S08](course-materials/presentations/2026-09-20_S01-S08.pdf)
+5. [TD](course-materials/td-guides/) → [TP](course-materials/tp-guides/) → [`labs/shoplab`](labs/shoplab/)
+
 ## Préparation avant le cours
 
 Installez d'abord Git avec le gestionnaire officiel de votre OS, puis clonez le dépôt public :
@@ -20,8 +28,15 @@ Depuis la racine du dépôt, lancez `./scripts/verify-host.sh` sous Linux, WSL2 
 ### Cours et présentations
 
 - [Cours complet (PDF)](course-materials/course/cours_complet.pdf)
-- [Présentation complète — 14 séances (PowerPoint)](course-materials/presentations/presentation_complete.pptx)
-- [Présentation S01–S02 prête à projeter (PDF)](course-materials/presentations/S01-S02.pdf)
+- [Présentation complète — 14 séances (PDF)](course-materials/presentations/presentation_complete.pdf)
+- [Présentation du 20 septembre — S01–S08 (PDF)](course-materials/presentations/2026-09-20_S01-S08.pdf)
+
+### Guides TD en PDF
+
+- [TD01 — autopsie d'une requête](course-materials/td-guides/TD01_autopsie_requete.pdf)
+- [TD02 — modèle de menace checkout](course-materials/td-guides/TD02_modele_menace_checkout.pdf)
+- [TD03 — revue architecture API](course-materials/td-guides/TD03_revue_architecture_api.pdf)
+- [TD04 — cellule incident](course-materials/td-guides/TD04_cellule_incident.pdf)
 
 ### Guides TP en PDF
 

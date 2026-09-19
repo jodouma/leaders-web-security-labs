@@ -42,7 +42,7 @@ Copiez le squelette `starter-files/TP03/authorization_policy.py`. Complétez une
 
 ```bash
 ./scripts/set-mode.sh corrected
-python3 -m unittest ../../starter-files/TP03/test_authorization_policy.py
+python3 ../../starter-files/TP03/test_authorization_policy.py
 ```
 
 Ne considérez pas le changement de mode comme votre correction : le livrable principal est votre politique et ses tests. Discutez `403` contre `404` selon le risque d'énumération.
