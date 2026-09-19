@@ -15,6 +15,7 @@ Matrice d'autorisation, preuves `200/401/403`, diff de correction dans `starter-
 ```bash
 cd labs/shoplab
 ./scripts/reset.sh
+mkdir -p preuves/TP03
 base=http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}
 ```
 
