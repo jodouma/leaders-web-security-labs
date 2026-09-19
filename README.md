@@ -15,11 +15,23 @@ Prérequis du cœur du lab : Git, Docker avec Compose v2, `curl`, OpenSSL et Pyt
 
 Depuis la racine du dépôt, lancez `./scripts/verify-host.sh` sous Linux, WSL2 ou macOS. Dans un checkout Windows accessible depuis PowerShell, utilisez `Set-ExecutionPolicy -Scope Process Bypass`, puis `.\scripts\Verify-Host.ps1`. En cas de `[FAIL]`, ne démarrez pas ShopLab : envoyez une capture complète de l'erreur et le nom/version de votre OS, après avoir masqué toute donnée personnelle ou tout jeton.
 
-## Supports du jour
+## Supports étudiants
 
-- [Présentation S01–S02 — éthique, scope, preuve et chemin d'une requête](course-materials/presentations/S01-S02.pdf)
-- [Guide TP01 — installer ShopLab et observer une requête (PDF)](course-materials/tp-guides/TP01_observer_le_flux.pdf)
-- [Guide TP02 — session, cookie, rotation, logout et CSRF (PDF)](course-materials/tp-guides/TP02_session_cookie_csrf.pdf)
+### Cours et présentations
+
+- [Cours complet (PDF)](course-materials/course/cours_complet.pdf)
+- [Présentation complète — 14 séances (PowerPoint)](course-materials/presentations/presentation_complete.pptx)
+- [Présentation S01–S02 prête à projeter (PDF)](course-materials/presentations/S01-S02.pdf)
+
+### Guides TP en PDF
+
+- [TP01 — installer ShopLab et observer une requête](course-materials/tp-guides/TP01_observer_le_flux.pdf)
+- [TP02 — session, cookie, rotation, logout et CSRF](course-materials/tp-guides/TP02_session_cookie_csrf.pdf)
+- [TP03 — autorisation et BOLA](course-materials/tp-guides/TP03_autorisation_bola.pdf)
+- [TP04 — injections, XSS et CSRF](course-materials/tp-guides/TP04_injections_xss_csrf.pdf)
+- [TP05 — fichiers, upload, SSRF et commande](course-materials/tp-guides/TP05_fichiers_upload_ssrf_commande.pdf)
+- [TP06 — API, proxy et conteneurs](course-materials/tp-guides/TP06_api_proxy_conteneurs.pdf)
+- [TP07 — base, DevSecOps et observabilité](course-materials/tp-guides/TP07_base_devsecops_observabilite.pdf)
 
 Tous les PDF prêts à projeter ou distribuer sont regroupés dans `course-materials/`. Les versions Markdown des TP restent séparées dans `tp/` pour lire et copier les commandes. Le laboratoire exécutable reste seul dans `labs/`.
 
