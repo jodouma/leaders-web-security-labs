@@ -73,6 +73,8 @@ docker compose --profile core logs --tail=30 proxy api db
 curl -sS http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}/api/products?q=lamp
 ```
 
+Forme synthétique à rechercher : `proxy … correlation_id=tp01-groupe-XX`, puis `api … correlation_id=tp01-groupe-XX`. Les timestamps et détails varient. Une ligne DB sans identifiant HTTP ne doit pas être attribuée à votre requête sans lien supplémentaire.
+
 Reliez chaque service au flux. Retrouvez votre `X-Correlation-ID` dans les logs API. Distinguez ce que vous avez observé de ce que vous inférez. Dessinez les frontières hôte/edge/core/base.
 
 ## Vérification, reset et cleanup (20 min)
