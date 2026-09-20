@@ -10,6 +10,8 @@ Travaillez uniquement sur `http://127.0.0.1` et `https://127.0.0.1`. Arrêtez-vo
 
 À la fin, vous saurez vérifier l'hôte, démarrer et arrêter le lab, suivre DNS/TCP/TLS/HTTP/proxy/API/DB et produire une preuve expurgée. Prérequis : terminal, Git, Docker avec Compose v2, `curl`, OpenSSL et Python 3. Depuis la racine du dépôt, utilisez `./scripts/verify-host.sh` avant de commencer.
 
+**Connexion au cours :** SL001–SL008 et chapitre S01 préparent la mise en place et la partie A; SL009–SL016 et chapitre S02 préparent les parties B et D. Vous observez une seule requête ShopLab et conservez le même identifiant de corrélation de l'entrée proxy jusqu'à l'API.
+
 ## Livrables et critères de réussite
 
 - un tableau `étape → observation → preuve → conclusion` ;
@@ -34,6 +36,14 @@ mkdir -p preuves/TP01
 ```
 
 Dans `scope.md`, notez cible autorisée, heure de début, outils, stop conditions et règle d'expurgation. Relevez `git rev-parse --short HEAD`, `docker version` et `docker compose version`.
+
+Exemple du **type** de ligne attendu dans l'index, à adapter à votre exécution :
+
+```text
+2026-09-21T08:42:00Z | ./scripts/verify-host.sh | PASS/WARN/FAIL | interprétation | limite
+```
+
+La date est synthétique. Copiez votre sortie réelle, sans token ni donnée personnelle. Si la cible affichée n'est pas locale, si `verify-host` termine par `[FAIL]` ou si le reset est incertain : arrêtez-vous et demandez une validation.
 
 ## B — Requête HTTP (35 min)
 
@@ -62,6 +72,8 @@ docker compose --profile core ps
 docker compose --profile core logs --tail=30 proxy api db
 curl -sS http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}/api/products?q=lamp
 ```
+
+Forme synthétique à rechercher : `proxy … correlation_id=tp01-groupe-XX`, puis `api … correlation_id=tp01-groupe-XX`. Les timestamps et détails varient. Une ligne DB sans identifiant HTTP ne doit pas être attribuée à votre requête sans lien supplémentaire.
 
 Reliez chaque service au flux. Retrouvez votre `X-Correlation-ID` dans les logs API. Distinguez ce que vous avez observé de ce que vous inférez. Dessinez les frontières hôte/edge/core/base.
 

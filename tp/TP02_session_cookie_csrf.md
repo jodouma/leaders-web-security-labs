@@ -6,6 +6,8 @@
 
 Seulement ShopLab sur `127.0.0.1`; comptes synthétiques. Ne publiez ni token, ni cookie, ni mot de passe, même ceux du lab. Vous allez comparer Bearer/cookie, observer les attributs, prouver rotation et révocation, puis vérifier une défense CSRF. TP01 et un lab sain sont requis.
 
+**Connexion au cours :** SL017–SL024 et chapitre S03 préparent la partie A. Commencez par annoter la transaction HTTP et les décisions navigateur/serveur; la rotation, le logout et CSRF seront approfondis en S05.
+
 ## Livrables
 
 Une chronologie de session expurgée, un tableau `contrôle → attaque → résultat → interprétation`, les statuts attendus et une proposition de correction. Réussite : login `200`, absence `401`, CSRF refusé `403`, rotation invalide l'ancien identifiant et logout empêche la réutilisation.
@@ -29,6 +31,17 @@ curl -sS -D preuves/TP02/login.headers -c preuves/TP02/cookies.txt \
 ```
 
 Avant remise, remplacez les valeurs de `Set-Cookie`, `access_token` et `csrf_token` par `[EXPURGÉ]`. Identifiez `HttpOnly`, `Secure`, `SameSite`, portée et durée. Expliquez quelles attaques chaque attribut réduit et lesquelles restent possibles.
+
+Exemple synthétique du **format** attendu :
+
+```text
+Host: 127.0.0.1:8080               → destination HTTP
+Origin: absent avec curl            → politique navigateur non exercée
+Set-Cookie: session=[EXPURGÉ]; …    → attributs évalués, valeur retirée
+HTTP 200                            → login accepté, pas « tout est sûr »
+```
+
+Décision : si une valeur sensible apparaît dans une capture, ne la remettez pas. Expurgez la copie, régénérez l'index et conservez seulement les attributs nécessaires à l'analyse.
 
 ## B — Cycle de session (40 min)
 

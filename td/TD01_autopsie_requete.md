@@ -2,6 +2,8 @@
 
 **Séance S02 · 90 min · C02 · Travail en binôme**
 
+**Connexion au cours :** SL009–SL016 et chapitre S02. Réutilisez le trajet Browser → DNS → TCP → TLS → proxy → API → DB et marquez chaque frontière avant de proposer une correction.
+
 ## Situation
 
 ShopLab fonctionne depuis l'hôte sur `https://127.0.0.1:8443`, mais le navigateur affiche une erreur après une modification du proxy. Vous disposez uniquement des extraits synthétiques suivants :
@@ -25,7 +27,21 @@ Architecture déclarée : navigateur → proxy Nginx (edge) → API (core) → P
 5. En 15 min, proposez la correction minimale et deux tests de non-régression (succès API et panne DB visible sans fuite).
 6. En 10 min, rendez une note d'incident de 120 mots maximum : impact, cause probable, preuve manquante, action suivante.
 
+<div class="page-break"></div>
+
 ## Garde-fous et critères
+
+Exemple de **forme de preuve** attendue, sans donner la conclusion :
+
+```text
+Observation : proxy | connect() failed … upstream=…
+Couche : proxy → amont
+Hypothèse : …
+Test local qui la réfute : …
+Résultat attendu si l'hypothèse est fausse : …
+```
+
+Stop condition : toute commande visant une cible autre que `127.0.0.1` ou un service ShopLab déclaré est retirée du plan. Si deux lignes portent des identifiants différents, ne les fusionnez pas sans preuve supplémentaire.
 
 Toutes les commandes proposées ciblent `127.0.0.1` ou les services du réseau Docker. Ne supposez pas que TLS, HTTP et santé métier sont équivalents. Une conclusion doit citer une preuve; sinon marquez-la « hypothèse ».
 
