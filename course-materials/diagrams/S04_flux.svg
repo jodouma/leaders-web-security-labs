@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#D69422"/></marker></defs>
+<rect width="1600" height="420" fill="#EDF5F7"/>
+<text x="50" y="52" font-family="Liberation Sans" font-size="28" font-weight="700" fill="#102A43">S04 · Menaces et risque</text>
+<text x="50" y="88" font-family="Liberation Sans" font-size="16" fill="#526777">Source éditable · palette pédagogique provisoire</text>
+<rect x="50.0" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="166.7" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">actifs</text>
+<line x1="286.3" y1="221" x2="300.3" y2="221" stroke="#D69422" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="303.3" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="420.0" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">flux</text>
+<line x1="539.7" y1="221" x2="553.7" y2="221" stroke="#D69422" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="556.7" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="673.3" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">frontières</text>
+<line x1="793.0" y1="221" x2="807.0" y2="221" stroke="#D69422" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="810.0" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="926.7" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">abus</text>
+<line x1="1046.3" y1="221" x2="1060.3" y2="221" stroke="#D69422" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1063.3" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="1180.0" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">contrôles</text>
+<line x1="1299.7" y1="221" x2="1313.7" y2="221" stroke="#D69422" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1316.7" y="165" width="233.3" height="112" rx="18" fill="#FFFFFF" stroke="#18A9B8" stroke-width="3"/>
+<text x="1433.3" y="230" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#102A43">tests</text>
+<text x="800" y="355" text-anchor="middle" font-family="Liberation Sans" font-size="20" font-weight="700" fill="#176B91">Passer d'un dessin d'architecture à des scénarios testables et priorisés.</text>
+</svg>
