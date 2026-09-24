@@ -36,8 +36,8 @@ Exécutez le script `scripts/exercise-rate-limit.sh` qui utilise un compte synth
 
 ```bash
 curl -skI https://127.0.0.1:${SHOPLAB_HTTPS_PORT:-8443}/
-docker compose --profile core config
-docker compose --profile core exec -T api id
+./scripts/compose.sh --profile core config
+./scripts/compose.sh --profile core exec -T api id
 ```
 
 Vérifiez CSP, HSTS (seulement HTTPS), `X-Content-Type-Options`, permissions, ports liés à loopback, réseau core interne, absence de Docker socket, `read_only`, `cap_drop`, secrets synthétiques. Injectez un `X-Forwarded-For` factice et vérifiez qu'il n'accorde aucun privilège; documentez la liste de proxies de confiance requise en production.
@@ -52,7 +52,7 @@ Lancez `verify-lab.sh api` puis `verify-lab.sh hardening`. Chaque assertion doit
 ./scripts/reset.sh
 ./scripts/health-check.sh core
 ./scripts/cleanup.sh
-docker compose --profile core ps --all
+./scripts/compose.sh --profile core ps --all
 ```
 
 ## Dépannage et plateformes

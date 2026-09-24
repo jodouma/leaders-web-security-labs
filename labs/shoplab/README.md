@@ -9,17 +9,18 @@ Application FastAPI/PostgreSQL derrière Nginx, prévue exclusivement pour les T
 ./scripts/health-check.sh core
 ./scripts/set-mode.sh corrected
 ./scripts/verify-lab.sh basic
+./scripts/compose.sh --profile core ps
 ./scripts/reset.sh
 ./scripts/cleanup.sh
 ```
 
 Les identifiants synthétiques sont `alice / atelier-alice`, `bob / atelier-bob`, `admin / atelier-admin`. Ne les réutilisez nulle part et ne les joignez pas à une remise. Les ports par défaut sont `127.0.0.1:8080` et `127.0.0.1:8443`; utilisez `SHOPLAB_HTTP_PORT` et `SHOPLAB_HTTPS_PORT` si nécessaire.
 
-Le projet Compose est calculé depuis l'utilisateur et le dossier; surchargez avec un nom unique, par exemple `SHOPLAB_PROJECT=shoplab-groupe07`, pour des exécutions parallèles. Aucun `container_name` ni nom global de réseau n'est fixé.
+Le projet Compose est calculé depuis l'utilisateur et le dossier; surchargez avec un nom unique, par exemple `SHOPLAB_PROJECT=shoplab-groupe07`, pour des exécutions parallèles. Pour toute inspection directe, utilisez `./scripts/compose.sh …` afin de viser ce même projet. Aucun `container_name` ni nom global de réseau n'est fixé.
 
 ## Suites de vérification
 
-`verify-lab.sh` accepte `basic`, `session`, `authz`, `injection`, `files`, `api`, `hardening`, `database` et `observability`. Les deux dernières produisent un WARN et exigent les preuves guidées TP07. `runtime-test.sh` possède un trap de cleanup et ne doit laisser aucune ressource, même après échec.
+`verify-lab.sh` accepte `basic`, `session`, `authz`, `injection`, `files`, `api`, `hardening`, `database` et `observability`. `database` vérifie la matrice de privilèges après réalisation du starter; `observability` conserve un WARN car l'interprétation des preuves reste guidée. `runtime-test.sh` possède un trap de cleanup et ne doit laisser aucune ressource, même après échec.
 
 ## Limites connues
 

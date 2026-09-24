@@ -6,7 +6,7 @@ useDefault = true
 [allowlist]
 description = "Generated QA/runtime files and the explicit invalid training token are not secrets"
 paths = [
-  '''(^|/)lab-environment/\.state/''',
+  '''(^|/)labs/shoplab/\.state/''',
   '''(^|/)qa/(renders|tmp)/''',
   '''(^|/)source/__pycache__/''',
 ]

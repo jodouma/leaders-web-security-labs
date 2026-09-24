@@ -72,7 +72,7 @@ Attendus : vulnérable `200`; corrigé sans token `403`; corrigé avec token cor
 
 ## D — Logout et journalisation (25 min)
 
-Appelez `POST /api/auth/logout` avec le cookie et le header CSRF. Réutilisez ensuite l'ancien Bearer : attendu `401`. Recherchez par identifiant de corrélation dans `docker compose logs api`, sans copier d'identifiant d'authentification.
+Appelez `POST /api/auth/logout` avec le cookie et le header CSRF. Réutilisez ensuite l'ancien Bearer : attendu `401`. Recherchez par identifiant de corrélation avec `./scripts/compose.sh --profile core logs api`, sans copier d'identifiant d'authentification.
 
 ## Vérification, reset, cleanup (25 min)
 
