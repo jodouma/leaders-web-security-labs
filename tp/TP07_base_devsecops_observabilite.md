@@ -22,9 +22,31 @@ mkdir -p preuves/TP07
 
 À partir de `starter-files/TP07/roles.sql`, définissez `shoplab_runtime` (SELECT/INSERT/UPDATE ciblés), `shoplab_readonly` (SELECT) et `shoplab_backup` (lecture nécessaire), sans superuser, création de rôle/base ni ownership. Exécutez dans la base jetable. Prouvez : lecture autorisée; `DROP TABLE` et lecture d'une table d'audit refusées au runtime; écriture refusée au readonly. N'enregistrez aucun mot de passe dans Git.
 
+Complétez le starter, puis exécutez-le et contrôlez la matrice sans créer de mot de passe :
+
+```bash
+./scripts/compose.sh --profile core exec -T db psql -U postgres -d websec \
+  < ../../starter-files/TP07/roles.sql
+./scripts/verify-lab.sh database
+```
+
+Attendu après une implémentation correcte : quatre lignes `[PASS]`. Un refus est une preuve attendue, pas une raison d'accorder davantage de droits.
+
 ## B — Backup/restore vérifié (30 min)
 
 Utilisez `pg_dump` dans le conteneur vers `.state/` ignoré, calculez SHA-256, restaurez dans une base temporaire du même projet, puis comparez nombre de lignes et contraintes. Une archive créée sans test de restauration n'est pas une preuve de sauvegarde. Supprimez base temporaire et archive lors du cleanup.
+
+```bash
+./scripts/compose.sh --profile core exec -T db pg_dump -U websec -d websec -Fc > .state/tp07.dump
+shasum -a 256 .state/tp07.dump | tee preuves/TP07/backup.sha256
+./scripts/compose.sh --profile core exec -T db createdb -U postgres websec_restore
+./scripts/compose.sh --profile core exec -T db pg_restore -U postgres -d websec_restore --no-owner < .state/tp07.dump
+./scripts/compose.sh --profile core exec -T db psql -U postgres -d websec_restore \
+  -c 'SELECT count(*) AS products FROM products;'
+./scripts/compose.sh --profile core exec -T db dropdb -U postgres websec_restore
+```
+
+Attendu : restauration sans erreur et `products = 3`. L'empreinte est propre à votre archive; elle sert à identifier la preuve, pas à comparer deux exécutions.
 
 ## C — Pipeline local (40 min)
 
@@ -37,6 +59,18 @@ Le rapport sépare exécution de l'outil et résultat : `PASS`, `WARN` avec find
 ## D — Logs, métriques et incident (35 min)
 
 Démarrez `observe`, déclenchez un login invalide puis un refus BOLA avec des `X-Correlation-ID` synthétiques. Recherchez événement, statut et compteur. Construisez une chronologie UTC de cinq lignes : signal, triage, hypothèse, correction, retest. Vérifiez l'absence de password/token/cookie dans les logs.
+
+```bash
+./scripts/lab-start.sh observe
+curl -sS -o /dev/null -H 'X-Correlation-ID: tp07-login-fail' \
+  -H 'Content-Type: application/json' -d '{"username":"alice","password":"synthetic-wrong"}' \
+  http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}/api/auth/login
+curl -G -sS --data-urlencode 'query={service="websec-api"}' --data-urlencode 'limit=20' \
+  http://127.0.0.1:${SHOPLAB_LOKI_PORT:-3100}/loki/api/v1/query_range \
+  > preuves/TP07/loki.json
+curl -sS 'http://127.0.0.1:'${SHOPLAB_PROM_PORT:-9090}'/api/v1/query?query=websec_http_requests_total' \
+  > preuves/TP07/prometheus.json
+```
 
 ## E — Vérification et reset (20 min)
 
@@ -51,7 +85,7 @@ Le script de runtime installe un trap qui appelle cleanup même si une assertion
 
 ## Dépannage et limites de plateforme
 
-Les images et bases peuvent exiger Internet au premier build; la séance elle-même utilise les images préchargées. Sur macOS/Windows, les volumes résident dans la VM Docker : utilisez `docker compose exec`, pas un chemin hôte supposé. Si SCA ne peut joindre son feed, classez `WARN: non évalué`, jamais PASS. L'observabilité complète est plus lourde (≥4 Gio recommandés); le fallback est le JSONL local documenté.
+Les images et bases peuvent exiger Internet au premier build; la séance elle-même utilise les images préchargées. Sur macOS/Windows, les volumes résident dans la VM Docker : utilisez `./scripts/compose.sh … exec`, pas un chemin hôte supposé. Si SCA ne peut joindre son feed, classez `WARN: non évalué`, jamais PASS. L'observabilité complète est plus lourde (≥4 Gio recommandés); le fallback est le JSONL local documenté.
 
 ## Barème /20
 

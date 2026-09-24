@@ -68,8 +68,8 @@ Relevez sujet, émetteur, SAN, dates, version TLS et cipher. Le certificat est a
 ## D — De proxy à la base (45 min)
 
 ```bash
-docker compose --profile core ps
-docker compose --profile core logs --tail=30 proxy api db
+./scripts/compose.sh --profile core ps
+./scripts/compose.sh --profile core logs --tail=30 proxy api db
 curl -sS http://127.0.0.1:${SHOPLAB_HTTP_PORT:-8080}/api/products?q=lamp
 ```
 
@@ -84,7 +84,7 @@ Reliez chaque service au flux. Retrouvez votre `X-Correlation-ID` dans les logs 
 ./scripts/reset.sh
 ./scripts/health-check.sh core
 ./scripts/cleanup.sh
-docker compose --profile core ps --all
+./scripts/compose.sh --profile core ps --all
 ```
 
 Le dernier tableau ne doit contenir aucun conteneur actif du projet. Le trap de test nettoie aussi après échec.

@@ -77,6 +77,11 @@ case "$suite" in
     ;;
   api)
     "$(dirname "$0")/set-mode.sh" corrected >/dev/null
+    if curl -fsS "$base/openapi.json" | python3 -c 'import json,sys; assert len(json.load(sys.stdin)["paths"]) > 0'; then
+      ok 'schéma OpenAPI accessible via le proxy'
+    else
+      bad 'schéma OpenAPI inaccessible via le proxy'
+    fi
     token=$(login alice atelier-alice | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')
     body=$(curl -fsS -X PATCH -H "Authorization: Bearer $token" -H 'Content-Type: application/json' -d '{"display_name":"Alice","role":"admin"}' "$base/api/users/me")
     if grep -q 'display_name' <<<"$body" && ! grep -q '"role"' <<<"$body"; then ok 'mass assignment filtré'; else bad 'mass assignment'; fi
@@ -88,7 +93,17 @@ case "$suite" in
     cid=$(compose --profile core ps -q api)
     if [[ -n "$cid" ]] && [[ $(docker inspect "$cid" --format '{{.HostConfig.ReadonlyRootfs}}') == true ]]; then ok 'API read-only'; else bad 'API non read-only'; fi
     ;;
-  database|observability)
+  database)
+    roles=$(compose --profile core exec -T db psql -U websec -d websec -Atc "SELECT count(*) FROM pg_roles WHERE rolname IN ('shoplab_runtime','shoplab_readonly','shoplab_backup')")
+    [[ "$roles" == 3 ]] && ok 'trois rôles applicatifs présents' || bad "rôles présents=$roles attendu=3"
+    runtime=$(compose --profile core exec -T db psql -U websec -d websec -Atc "SELECT has_table_privilege('shoplab_runtime','products','SELECT') AND NOT pg_has_role('shoplab_runtime','websec','MEMBER') AND NOT has_table_privilege('shoplab_runtime','audit_events','SELECT')")
+    [[ "$runtime" == t ]] && ok 'runtime: lecture métier permise, DDL/audit refusés' || bad 'privilèges runtime incorrects'
+    readonly=$(compose --profile core exec -T db psql -U websec -d websec -Atc "SELECT has_table_privilege('shoplab_readonly','products','SELECT') AND NOT has_table_privilege('shoplab_readonly','products','UPDATE')")
+    [[ "$readonly" == t ]] && ok 'readonly: lecture permise, écriture refusée' || bad 'privilèges readonly incorrects'
+    backup=$(compose --profile core exec -T db psql -U websec -d websec -Atc "SELECT has_table_privilege('shoplab_backup','users','SELECT') AND has_table_privilege('shoplab_backup','products','SELECT')")
+    [[ "$backup" == t ]] && ok 'backup: lecture des tables métier permise' || bad 'privilèges backup incorrects'
+    ;;
+  observability)
     note "$suite nécessite la procédure guidée TP07 et une validation manuelle des preuves"
     ;;
   *) bad "suite inconnue: $suite" ;;
